@@ -30,8 +30,8 @@
 
 /*--------------------------------   MACROS   --------------------------------*/
 /*SIZE*/
-# define HEIGHT 1080
-# define WIDTH 700
+# define WIDTH 1080
+# define HEIGHT 700
 // esto copiadito de la elisa
 # define WALL_H 500 // altura del muro, puse eso por probar xd
 # define WALL_W 500 // ancho del muro, puse eso por probar xd
@@ -92,6 +92,7 @@ typedef struct s_ray
 	double			length;
 	int				x_sign; // initiate at 1 and then if chage to -1 to fix direction
 	int				y_sign;
+	int				last_cross; //0 si toco x, 1 si toco y. Asi se puede restar el ultimo paso
 	t_coordinate	wall_collision;
 }	t_ray;
 
@@ -102,6 +103,7 @@ typedef struct s_data
 	t_ray		*ray;
 	t_player	*playa;	
 	char		**map;
+	int			prueba;
 }	t_data;
 
 /*-------------------------------   FUNCTIONS   ------------------------------*/
