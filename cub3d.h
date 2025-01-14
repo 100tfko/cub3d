@@ -41,7 +41,8 @@
 # define IMG_ERROR 2
 /*PI*/
 # define PI 3.14159265358979323846 //existe el M_PI pero me puedo fiar?
-
+/*MARGEN DE ERROR*/
+# define EPSILON 0.3 //no era el margen de error, si yo sabia
 /*--------------------------------   STRUCTS   -------------------------------*/
 
 typedef struct s_rgb
@@ -67,7 +68,7 @@ typedef struct s_player
 	int				color;
 	double			mov_speed;
 	double			rot_speed;
-	int				angle;
+	double			angle; //esta en radianes ya directo. con int podria ser grados ccreo
 	int				size;
 }	t_player;
 
