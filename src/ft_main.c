@@ -24,7 +24,8 @@ void	ft_error(int i, t_data *data)
 void	ft_rayete(t_data *data, int i)
 {
 	data->ray->deltaang = (PI / 2) / (WIDTH - 1); //5 - 1 porque 5 rayos, 4 huecos
-	data->ray->angle = (-PI/2) + (i * data->ray->deltaang);
+//	data->ray->angle = (-PI/4) + (i * data->ray->deltaang);
+	data->ray->angle = data->playa->angle + (i * data->ray->deltaang);
 	data->ray->dir.x = cos(data->ray->angle); //distancias del rayo por unidad de grid
 	data->ray->dir.y = sin(data->ray->angle);
 	data->ray->origin = *data->playa->pos;
@@ -62,16 +63,16 @@ void	ft_rayete(t_data *data, int i)
 			data->ray->first_x += data->ray->delta_x;
 			map_x += data->ray->x_sign;
 			data->ray->length = data->ray->first_x;
-//			data->ray->last_cross = 0;
+			data->ray->last_cross = 0;
 		}
 		else
 		{
 			data->ray->first_y += data->ray->delta_y;
 			map_y += data->ray->y_sign;
 			data->ray->length = data->ray->first_y;
-//			data->ray->last_cross = 1;
+			data->ray->last_cross = 1;
 		}
-		printf("LENGTH INTRA %.2f | COORDINATES %i %i\n", data->ray->length, map_x, map_y);
+		printf("LENGTH INTRA %.2f | COORDINATES %i %i | X Y %.2f %.2f\n", data->ray->length, map_x, map_y, data->ray->first_x, data->ray->first_y);
 //		printf("Map Pos: (%d, %d), first_x: %.2f, first_y: %.2f\n", 
 //		map_x, map_y, data->ray->first_x, data->ray->first_y);
 	}
@@ -105,7 +106,16 @@ void	ft_paint_walls(t_data *f, float wall, int col) //abr'ia que a;adirle la col
 			mlx_put_pixel(f->img, col, j, 55555555);
 		else if (j > bot)
 			mlx_put_pixel(f->img, col, j, 99999999);
+		else if (f->ray->x_sign == 1 && f->ray->last_cross == 0)
+			mlx_put_pixel(f->img, col, j, 11111111);
+		else if (f->ray->x_sign == -1 && f->ray->last_cross == 0)
+			mlx_put_pixel(f->img, col, j, 22222222);
+		else if (f->ray->y_sign == 1 && f->ray->last_cross == 1)
+			mlx_put_pixel(f->img, col, j, 33333333);
+		else if (f->ray->y_sign == -1 && f->ray->last_cross == 1)
+			mlx_put_pixel(f->img, col, j, 44444444);
 		j++;
+
 	}
 //	ft_draw_walls(info, coll, col, top);
 }
@@ -118,8 +128,18 @@ void	ft_hook(void *param)
 	f = param;
 	if (mlx_is_key_down(f->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(f->mlx);
-	if (mlx_is_key_down(f->mlx, MLX_KEY_J))
-		f->prueba += 1; // no funciona porque el bucle se reinicia.
+	if (mlx_is_key_down(f->mlx, MLX_KEY_W))
+		f->playa->pos->x += 0.1; // no funciona porque el bucle se reinicia.
+	if (mlx_is_key_down(f->mlx, MLX_KEY_S))
+		f->playa->pos->x -= 0.1;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_D))
+		f->playa->pos->y += 0.1;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_A))
+		f->playa->pos->y -= 0.1;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_E))
+		f->playa->angle += 0.1;
+	if (mlx_is_key_down(f->mlx, MLX_KEY_Q))
+		f->playa->angle -= 0.1;
 	//podr'ia concentrarlo todo en un funcion y tirarlo a mlx_key_hook
 
 //	ft_key_control(f);
@@ -147,6 +167,7 @@ void	ft_openwindow(t_data *f)
 // nu ze si la imagen me est'a haciendo algo ahora la verdat
 	f->img = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	f->prueba = 0;
+	f->playa->angle = 0;
 	if (!f->img || (mlx_image_to_window(f->mlx, f->img, 0, 0) < 0))
 		ft_error(IMG_ERROR, f);
 	mlx_loop_hook(f->mlx, &ft_hook, f);
