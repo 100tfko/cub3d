@@ -95,6 +95,8 @@ typedef struct s_ray
 	int				y_sign;
 	int				last_cross; //0 si toco x, 1 si toco y. Asi se puede restar el ultimo paso
 	t_coordinate	wall_collision;
+	int				map_x;
+	int				map_y;
 }	t_ray;
 
 typedef struct s_data
@@ -110,7 +112,18 @@ typedef struct s_data
 /*-------------------------------   FUNCTIONS   ------------------------------*/
 
 // main file
-int	main(void);
+int		main(void);
+void	ft_openwindow(t_data *f);
+void	ft_init_f(t_data *f);
+void	ft_hook(void *param);
+void	ft_paint_walls(t_data *f, float wall, int col);
+void	ft_error(int i, t_data *data);
+
+// raycast file
+void	ft_rayete(t_data *data, int i);
+void	ft_traverse_map(t_data *data);
+void	ft_ray_direction(t_data *data);
+void	ft_init_ray(t_data *data, int i);
 
 // aux file
 
