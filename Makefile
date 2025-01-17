@@ -26,6 +26,7 @@ LIBFT = $(LIBFT_PATH)/libft.a
 HEADERS = -I ./libs -I $(MLX42_PATH)/include/MLX42 -I $(LIBFT_PATH)
 
 SRCS =	src/ft_main.c\
+		src/ft_raycast.c\
 
 OBJS = $(SRCS:src/%.c=obj/%.o)
 
