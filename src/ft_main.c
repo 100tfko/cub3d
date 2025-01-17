@@ -34,11 +34,11 @@ void	ft_paint_walls(t_data *f, float wall, int col) //abr'ia que a;adirle la col
 	while (j < HEIGHT)
 	{
 		if (j < top)
-			mlx_put_pixel(f->img, col, j, 55555555);
+			mlx_put_pixel(f->img, col, j, (255 << 24 | 255 << 16 | 255 << 8 | 150));
 		else if (j > bot)
 			mlx_put_pixel(f->img, col, j, 99999999);
 		else if (f->ray->x_sign == 1 && f->ray->last_cross == 0)
-			mlx_put_pixel(f->img, col, j, 11111111);
+			mlx_put_pixel(f->img, col, j, (255 << 24 | 0 << 16 | 0 << 8 | 100));
 		else if (f->ray->x_sign == -1 && f->ray->last_cross == 0)
 			mlx_put_pixel(f->img, col, j, 22222222);
 		else if (f->ray->y_sign == 1 && f->ray->last_cross == 1)
@@ -60,17 +60,17 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(f->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(f->mlx);
 	if (mlx_is_key_down(f->mlx, MLX_KEY_W))
-		f->playa->pos->x += 0.1;
+		f->playa->pos->x += 0.05;
 	if (mlx_is_key_down(f->mlx, MLX_KEY_S))
-		f->playa->pos->x -= 0.1;
+		f->playa->pos->x -= 0.05;
 	if (mlx_is_key_down(f->mlx, MLX_KEY_D))
-		f->playa->pos->y += 0.1;
+		f->playa->pos->y += 0.05;
 	if (mlx_is_key_down(f->mlx, MLX_KEY_A))
-		f->playa->pos->y -= 0.1;
+		f->playa->pos->y -= 0.05;
 	if (mlx_is_key_down(f->mlx, MLX_KEY_E))
-		f->playa->angle += 0.1;
+		f->playa->angle += 0.05;
 	if (mlx_is_key_down(f->mlx, MLX_KEY_Q))
-		f->playa->angle -= 0.1;
+		f->playa->angle -= 0.05;
 	i = 0;
 	while (i < 1080)
 	{
@@ -115,20 +115,20 @@ int	main(void)
 	data.map = malloc(10 * sizeof(char *) + 1);
 	data.playa = malloc(1 * sizeof(t_player));
 	data.playa->pos = malloc(512);
-	data.playa->pos->x = 4.5;
-	data.playa->pos->y = 4.5;
+	data.playa->pos->x = 6.5;
+	data.playa->pos->y = 6.5;
 	i = -1;
 	while (data.map[++i])
 		data.map[1] = ft_calloc(11, 1);
 	data.map[0] = "1111111111";
 	data.map[1] = "1000000001";
-	data.map[2] = "1000000001";
-	data.map[3] = "1000000001";
-	data.map[4] = "1000000001";
+	data.map[2] = "1011100001";
+	data.map[3] = "1010100001";
+	data.map[4] = "1011100001";
 	data.map[5] = "1000000001";
 	data.map[6] = "1000000001";
 	data.map[7] = "1000000001";
-	data.map[8] = "1000000001";
+	data.map[8] = "1100000001";
 	data.map[9] = "1111111111";
 	data.map[10] = 0;
 	i = -1;
