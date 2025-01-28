@@ -33,9 +33,9 @@
 # define WIDTH 1080
 # define HEIGHT 700
 // esto copiadito de la elisa
-# define WALL_H 500 // altura del muro, puse eso por probar xd
+# define WALL_H 600 // altura del muro, puse eso por probar xd
 # define WALL_W 500 // ancho del muro, puse eso por probar xd
-# define FOV 90 // campo de visión
+# define FOV 90 // campo de visión. YO lo tengo en radianes. Deber\oia ser PI/2
 //ERORS
 # define MLX_ERROR 1
 # define IMG_ERROR 2
