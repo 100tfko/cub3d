@@ -28,14 +28,14 @@ void	ft_traverse_map(t_data *data)
 	{
 		if (fabs(data->ray->first_x) < fabs(data->ray->first_y)) // posible necesidad de epsilon
 		{
-			data->ray->length = data->ray->first_x; // era hacer esto primero, loco.
+			data->ray->length = data->ray->first_x * cos(data->ray->angle - (data->playa->angle)); // era hacer esto primero, loco.
 			data->ray->first_x += data->ray->delta_x;
 			map_x += data->ray->x_sign;
 			data->ray->last_cross = 0;
 		}
 		else
 		{
-			data->ray->length = data->ray->first_y;
+			data->ray->length = data->ray->first_y * cos(data->ray->angle - data->playa->angle);
 			data->ray->first_y += data->ray->delta_y;
 			map_y += data->ray->y_sign;
 			data->ray->last_cross = 1;
@@ -69,7 +69,7 @@ void	ft_ray_direction(t_data *data)
 void	ft_init_ray(t_data *data, int i)
 {
 	data->ray->deltaang = (PI / 2) / (WIDTH - 1);
-	data->ray->angle = data->playa->angle + (i * data->ray->deltaang);
+	data->ray->angle = data->playa->angle -(PI/4) + (i * data->ray->deltaang);
 	data->ray->dir.x = cos(data->ray->angle);
 	data->ray->dir.y = sin(data->ray->angle);
 	data->ray->origin = *data->playa->pos;

@@ -75,7 +75,7 @@ void	ft_hook(void *param)
 	while (i < 1080)
 	{
 		ft_rayete (f, i);
-		ft_paint_walls(f, (WALL_H - (f->ray->length) * 30), i); // habia uqe a;adirle datos de colision
+		ft_paint_walls(f, (WALL_H - (f->ray->length) * 40), i); // habia uqe a;adirle datos de colision
 		i += 1;
 	}
 }
